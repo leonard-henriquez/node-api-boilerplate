@@ -1,9 +1,10 @@
 import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
+import morgan from 'morgan'
 import mongoose from 'mongoose'
 
-const { PORT, MONGO_URI } = process.env
+const { PORT, MONGO_URI, LOG_FORMAT } = process.env
 
 // Instantiate express framework
 const app = express()
@@ -12,6 +13,8 @@ const app = express()
 app.use(cors({
   origin: '*',
 }))
+
+app.use(morgan(LOG_FORMAT || 'combined'))
 
 // Connect to MongoDb
 mongoose.connect(MONGO_URI, { useNewUrlParser: true })
