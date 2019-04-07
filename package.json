@@ -1,0 +1,25 @@
+{
+  "name": "node-api-boilerplate",
+  "version": "1.0.0",
+  "description": "Node API Boilerplate",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "./node_modules/nodemon/bin/nodemon.js ./src/index.js"
+  },
+  "engines": {
+    "node": "^10.16.0"
+  },
+  "author": "Leonard Henriquez",
+  "license": "MIT",
+  "dependencies": {
+    "boom": "^7.3.0",
+    "fastify": "^2.2.0",
+    "fastify-swagger": "^2.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "nodemon": "^1.18.10"
+  }
+}
