@@ -1,23 +1,33 @@
+// Import environment variables
 import 'dotenv/config'
 
-const { MONGO_URI } = process.env
+const { PORT, MONGO_URI } = process.env
 
-// Require the fastify framework and instantiate it
+// Import the fastify framework and instantiate it
 const fastify = require('fastify')({
   logger: true,
 })
 
+// Add CORS headers
+fastify.register(require('fastify-cors'), {
+  origin: '*',
+})
+
+// Import mongoose ODM
 const mongoose = require('mongoose')
 
+// Connect to MongoDb
 mongoose.connect(MONGO_URI, { useNewUrlParser: true })
   .then(() => console.log('MongoDB connected…'))
   .catch(err => console.log(err))
 
+// Import routes
 fastify.get('/', async (request, reply) => ({ hello: 'world' }))
 
+// Create server
 const start = async () => {
   try {
-    await fastify.listen(3000)
+    await fastify.listen(PORT || 3000)
     fastify.log.info(`server listening on ${fastify.server.address().port}`)
   } catch (err) {
     fastify.log.error(err)
@@ -25,4 +35,5 @@ const start = async () => {
   }
 }
 
+// Instanciate server
 start()
