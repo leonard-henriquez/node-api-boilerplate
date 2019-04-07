@@ -1640,6 +1640,14 @@ fast-safe-stringify@^2.0.6:
   resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.0.6.tgz#04b26106cc56681f51a044cfc0d76cf0008ac2c2"
   integrity sha512-q8BZ89jjc+mz08rSxROs8VsrBBcn1SIw1kq9NjolL509tkABRk9io01RAjSaEv1Xb2uFLt8VtRiZbGp5H8iDtg==
 
+fastify-cors@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/fastify-cors/-/fastify-cors-2.1.2.tgz#5cafc79b974a73f61136f1871bf59208af06b7b0"
+  integrity sha512-/TEco5naXbM2ob3fSvl8IvbRpM4fBDLnwOZ7KJ5frpgiky8Yv0O8k8W5JE3oc64xfNeVcv/yBkqgRByRPk1ecw==
+  dependencies:
+    fastify-plugin "^1.5.0"
+    vary "^1.1.2"
+
 fastify-plugin@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-1.5.0.tgz#4bea12c54112f4749c17f3a1f17356cbdfa661af"
@@ -3994,6 +4002,11 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+vary@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
+  integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
 which@^1.2.9:
   version "1.3.1"
