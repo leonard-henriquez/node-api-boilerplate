@@ -4,6 +4,8 @@
   "description": "Node API Boilerplate",
   "main": "src/index.js",
   "scripts": {
+    "lint": "./node_modules/.bin/eslint -c .eslintrc.json src",
+    "fix": "./node_modules/.bin/eslint --fix -c .eslintrc.json src",
     "start": "./node_modules/nodemon/bin/nodemon.js ./src/index.js"
   },
   "engines": {
