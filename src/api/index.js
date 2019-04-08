@@ -1,18 +1,22 @@
-const express = require('express')
+const { Router } = require('express')
+
+const { User } = require('../models/user')
+
+const users = require('../controllers/users')
+
+const models = { User }
 
 // Export function to register routes
 module.exports = ({ config, db }) => {
   // Instanciate router
-  const api = express.Router()
+  const router = Router()
 
   // Create routes
-  api.post('/', async (req, res) => {
-    res.json({ hello: req.params.item })
-  })
+  router.use('/users', users(models, { config }))
 
-  api.get('/health', async (req, res) => {
+  router.get('/health', async (req, res) => {
     res.status(200).send()
   })
 
-  return api
+  return router
 }
