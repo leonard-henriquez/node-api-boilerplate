@@ -1,36 +1,26 @@
-import 'dotenv/config'
-import express from 'express'
-import cors from 'cors'
-import morgan from 'morgan'
-import mongoose from 'mongoose'
+const express = require('express')
+const middlewares = require('./config/middlewares')
+const logger = require('./config/logger')
+const config = require('./config/constants')
+const connect = require('./config/db')
+const api = require('./api')
 
-const { PORT, MONGO_URI, LOG_FORMAT } = process.env
+// Instantiate express framework and apply middlewares
+const app = middlewares(express(), { config })
 
-// Instantiate express framework
-const app = express()
-
-// Add CORS headers
-app.use(cors({
-  origin: '*',
-}))
-
-app.use(morgan(LOG_FORMAT || 'combined'))
-
-// Connect to MongoDb
-mongoose.connect(MONGO_URI, { useNewUrlParser: true })
-  .then(() => console.log('MongoDB connected…'))
-  .catch(err => console.log(err))
+// Connect to database
+const db = connect({ config })
 
 // Import routes
-app.get('/', async (request, reply) => reply.json({ hello: 'world' }))
+app.use('/api', api({ config, db }))
 
 // Create server
 const start = async () => {
   try {
-    await app.listen(PORT || 3000)
-    console.log(`server listening on ${PORT || 3000}`)
+    await app.listen(config.port)
+    logger.info(`server listening on ${config.port}`)
   } catch (err) {
-    console.error(err)
+    logger.error(err)
     process.exit(1)
   }
 }
