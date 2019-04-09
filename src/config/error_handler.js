@@ -1,5 +1,7 @@
-const config = require('.')
-const logger = require('./logger')('error')
+import config from '.'
+import loggerFactory from '../helpers/logger'
+
+const logger = loggerFactory('error', config.get('log'))
 
 // Build response for the client
 const response = (err) => {
@@ -16,7 +18,7 @@ const response = (err) => {
   }
 }
 
-// Build error message for our logs
+// Build error message from error object
 const logMessage = err => ({ message: err.message, stack: err.stack.split('\n') })
 
 // Error handler
@@ -29,7 +31,7 @@ const errorHandler = (err, req, res, _next) => {
     .json(response(err))
 }
 
-module.exports = (app) => {
+export default (app) => {
   // Register errorHandler as a middleware
   app.use(errorHandler)
 

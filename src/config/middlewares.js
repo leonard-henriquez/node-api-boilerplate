@@ -1,9 +1,12 @@
-const compression = require('compression')
-const morgan = require('morgan')
-const bodyParser = require('body-parser')
-const methodOverride = require('method-override')
-const cors = require('cors')
-const logger = require('./logger')('request')
+import compression from 'compression'
+import morgan from 'morgan'
+import bodyParser from 'body-parser'
+import methodOverride from 'method-override'
+import cors from 'cors'
+import config from '.'
+import loggerFactory from '../helpers/logger'
+
+const logger = loggerFactory('request', config.get('log'))
 
 const format = (tokens, req, res) => JSON.stringify({
   method: tokens.method(req, res),
@@ -35,4 +38,4 @@ const middlewares = (app) => {
   return app
 }
 
-module.exports = middlewares
+export default middlewares
