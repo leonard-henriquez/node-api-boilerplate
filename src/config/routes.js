@@ -4,7 +4,7 @@ const users = require('../controllers/users')
 
 const models = { User }
 
-// Export function to register routes
+// Register routes
 module.exports = (app) => {
   // Instanciate router
   const router = Router()
@@ -12,11 +12,14 @@ module.exports = (app) => {
   // Create routes
   router.use('/users', users(models))
 
+  // Route for ping
   router.get('/health', async (req, res) => {
     res.status(200).send()
   })
 
+  // Register routes
   app.use('/api', router)
 
+  // Return app
   return app
 }
