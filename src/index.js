@@ -1,18 +1,21 @@
 const express = require('express')
-const middlewares = require('./config/middlewares')
+const config = require('./config')
 const logger = require('./config/logger')
-const config = require('./config/constants')
-const connect = require('./config/db')
-const api = require('./api')
 
 // Instantiate express framework and apply middlewares
-const app = middlewares(express(), { config })
+const app = express()
 
 // Connect to database
-const db = connect({ config })
+require('./config/db')()
+
+// Add middlewares
+require('./config/middlewares')(app)
 
 // Import routes
-app.use('/api', api({ config, db }))
+require('./config/routes')(app)
+
+// Add error handler
+require('./config/error_handler')(app)
 
 // Create server
 const start = async () => {

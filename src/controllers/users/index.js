@@ -1,10 +1,10 @@
 const { Router } = require('express')
 const list = require('./list')
 
-module.exports = (models, { config }) => {
+module.exports = (models) => {
   const router = Router()
 
-  router.get('/', list(models, { config }))
+  router.get('/', list(models))
 
   return router
 }
