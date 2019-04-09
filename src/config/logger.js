@@ -1,5 +1,5 @@
 const winston = require('winston')
-const config = require('./constants')
+const config = require('.')
 
 const fileOptions = {
   filename: config.logFilename,

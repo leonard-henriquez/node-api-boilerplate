@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 const logger = require('./logger')
+const config = require('./')
 
-module.exports = ({ config }) => {
+module.exports = () => {
   // Set debug
   mongoose.set('debug', config.debug)
 
