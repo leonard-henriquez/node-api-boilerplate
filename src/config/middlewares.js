@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import methodOverride from 'method-override'
 import cors from 'cors'
 import config from '.'
+import authentication from '../helpers/authentication'
 import loggerFactory from '../helpers/logger'
 
 const logger = loggerFactory('request', config.get('log'))
@@ -25,6 +26,9 @@ const middlewares = (app) => {
 
   // Add logger
   app.use(morgan(format, { stream: logger.streamJson }))
+
+  // Add authentication
+  app.use(authentication())
 
   // Add json parser
   app.use(bodyParser.json())
