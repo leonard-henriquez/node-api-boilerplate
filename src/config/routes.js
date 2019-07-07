@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import userRouter from '../resources/user/user.router'
+import authRouter from '../resources/auth/auth.router'
 
 // Register routes
 export default (app) => {
@@ -8,6 +9,7 @@ export default (app) => {
 
   // Create routes
   router.use('/users', userRouter)
+  router.use('/auth', authRouter)
 
   // Route for ping
   router.get('/health', (req, res) => {

@@ -56,4 +56,10 @@ export default {
       env: 'LOG_LEVEL',
     },
   },
+  jwt_secret: {
+    doc: 'JWT secret',
+    format: String,
+    default: 'secret',
+    env: 'JWT_SECRET',
+  },
 }
