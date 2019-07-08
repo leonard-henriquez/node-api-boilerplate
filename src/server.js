@@ -1,6 +1,10 @@
 const app = require('./app')
 const config = require('./config')
+const connect = require('./config/db')
 const loggerFactory = require('./helpers/logger')
+
+// Connect to database
+connect()
 
 // Create server
 const start = () => {
