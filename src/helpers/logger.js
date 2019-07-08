@@ -1,4 +1,4 @@
-import { createLogger, format, transports } from 'winston'
+const { createLogger, format, transports } = require('winston')
 
 // Destructures format for easier access
 const {
@@ -45,4 +45,4 @@ const loggerFactory = (labelName = undefined, config = {}) => {
   return logger
 }
 
-export default loggerFactory
+module.exports = loggerFactory

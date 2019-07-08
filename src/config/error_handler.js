@@ -1,5 +1,5 @@
-import config from '.'
-import loggerFactory from '../helpers/logger'
+const config = require('.')
+const loggerFactory = require('../helpers/logger')
 
 const logger = loggerFactory('error', config.get('log'))
 
@@ -31,7 +31,7 @@ const errorHandler = (err, req, res, _next) => {
     .json(response(err))
 }
 
-export default (app) => {
+module.exports = (app) => {
   // Register errorHandler as a middleware
   app.use(errorHandler)
 

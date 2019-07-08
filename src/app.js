@@ -1,8 +1,8 @@
-import express from 'express'
-import connect from './config/db'
-import middlewares from './config/middlewares'
-import routes from './config/routes'
-import errorHandler from './config/error_handler'
+const express = require('express')
+const connect = require('./config/db')
+const middlewares = require('./config/middlewares')
+const routes = require('./config/routes')
+const errorHandler = require('./config/error_handler')
 
 // Instantiate express framework and apply middlewares
 const app = express()
@@ -19,4 +19,4 @@ routes(app)
 // Add error handler
 errorHandler(app)
 
-export default app
+module.exports = app

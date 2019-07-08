@@ -1,11 +1,11 @@
-import passport from 'passport'
-import { Router } from 'express'
+const passport = require('passport')
+const { Router } = require('express')
 
-import {
+const {
   get,
   login,
   logout,
-} from './auth.controller'
+} = require('./auth.controller')
 
 const router = Router()
 
@@ -14,4 +14,4 @@ router.route('/')
   .post(login)
   .delete(logout)
 
-export default router
+module.exports = router

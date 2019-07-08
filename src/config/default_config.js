@@ -1,8 +1,8 @@
-import path from 'path'
+const path = require('path')
 
 const appRoot = path.resolve(path.join(__dirname, '..', '..'))
 
-export default {
+module.exports = {
   host: {
     doc: 'Hostname for server',
     default: '0.0.0.0',
