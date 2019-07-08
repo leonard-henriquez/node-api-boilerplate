@@ -1,6 +1,6 @@
-import app from './app'
-import config from './config'
-import loggerFactory from './helpers/logger'
+const app = require('./app')
+const config = require('./config')
+const loggerFactory = require('./helpers/logger')
 
 // Create server
 const start = () => {

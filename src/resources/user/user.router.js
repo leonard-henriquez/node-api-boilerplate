@@ -1,12 +1,12 @@
-import { Router } from 'express'
+const { Router } = require('express')
 
-import {
+const {
   list,
   create,
   get,
   update,
   remove,
-} from './user.controller'
+} = require('./user.controller')
 
 const router = Router()
 
@@ -19,4 +19,4 @@ router.route('/:id')
   .patch(update)
   .delete(remove)
 
-export default router
+module.exports = router

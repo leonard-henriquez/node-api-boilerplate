@@ -1,6 +1,6 @@
-import User from './user.model'
+const User = require('./user.model')
 
-export const list = async (req, res, next) => {
+const list = async (req, res, next) => {
   try {
     // Find all users
     const users = await User.find({})
@@ -12,7 +12,7 @@ export const list = async (req, res, next) => {
   }
 }
 
-export const create = async (req, res, next) => {
+const create = async (req, res, next) => {
   try {
     // Create local user
     const user = new User(req.body)
@@ -27,7 +27,7 @@ export const create = async (req, res, next) => {
   }
 }
 
-export const get = async (req, res, next) => {
+const get = async (req, res, next) => {
   try {
     // Find user
     const user = await User.findOne({ _id: req.params.id })
@@ -39,7 +39,7 @@ export const get = async (req, res, next) => {
   }
 }
 
-export const update = async (req, res, next) => {
+const update = async (req, res, next) => {
   try {
     // Find and update user
     const result = await User.updateOne({ _id: req.params.id }, req.body)
@@ -51,7 +51,7 @@ export const update = async (req, res, next) => {
   }
 }
 
-export const remove = async (req, res, next) => {
+const remove = async (req, res, next) => {
   try {
     // Find and remove user
     const result = await User.deleteOne({ _id: req.params.id })
@@ -61,4 +61,12 @@ export const remove = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
+}
+
+module.exports = {
+  list,
+  create,
+  get,
+  update,
+  remove,
 }

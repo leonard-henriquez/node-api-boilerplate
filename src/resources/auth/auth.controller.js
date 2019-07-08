@@ -1,10 +1,10 @@
-import jwt from 'jsonwebtoken'
-import User from '../user/user.model'
-import config from '../../config'
+const jwt = require('jsonwebtoken')
+const User = require('../user/user.model')
+const config = require('../../config')
 
 const secret = config.get('jwt_secret')
 
-export const get = async (req, res, next) => {
+const get = async (req, res, next) => {
   try {
     // Find all users
     const users = await User.find({})
@@ -16,7 +16,7 @@ export const get = async (req, res, next) => {
   }
 }
 
-export const login = async (req, res, next) => {
+const login = async (req, res, next) => {
   try {
     // Find user
     const user = await User.findOne({ email: req.body.email })
@@ -43,7 +43,7 @@ export const login = async (req, res, next) => {
   }
 }
 
-export const logout = async (req, res, next) => {
+const logout = async (req, res, next) => {
   try {
     // Find all users
     const users = await User.find({})
@@ -53,4 +53,10 @@ export const logout = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
+}
+
+module.exports = {
+  get,
+  login,
+  logout,
 }

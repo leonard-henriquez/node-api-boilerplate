@@ -1,9 +1,9 @@
-import { Router } from 'express'
-import userRouter from '../resources/user/user.router'
-import authRouter from '../resources/auth/auth.router'
+const { Router } = require('express')
+const userRouter = require('../resources/user/user.router')
+const authRouter = require('../resources/auth/auth.router')
 
 // Register routes
-export default (app) => {
+module.exports = (app) => {
   // Instanciate router
   const router = Router()
 

@@ -1,10 +1,10 @@
-import mongoose from 'mongoose'
-import loggerFactory from '../helpers/logger'
-import config from '.'
+const mongoose = require('mongoose')
+const loggerFactory = require('../helpers/logger')
+const config = require('.')
 
 const logger = loggerFactory('db', config.get('log'))
 
-export default () => {
+module.exports = () => {
   // Set debug
   if (config.get('debug')) {
     mongoose.set('debug', (collection, method, query, doc, options) => {
