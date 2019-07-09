@@ -2,10 +2,12 @@
   "name": "node-api-boilerplate",
   "version": "1.0.0",
   "description": "Node API Boilerplate",
-  "main": "src/index.js",
+  "author": "Leonard Henriquez <leonard.henriquez@edhec.com>",
+  "main": "src/server.js",
+  "private": false,
   "scripts": {
     "lint": "./node_modules/.bin/eslint -c .eslintrc.json src",
-    "fix": "./node_modules/.bin/eslint --fix -c .eslintrc.json src",
+    "lint:fix": "./node_modules/.bin/eslint --fix -c .eslintrc.json src",
     "test": "./node_modules/.bin/jest -c jest.config.js",
     "test:watch": "./node_modules/.bin/jest --watch -c jest.config.js",
     "test:coverage": "./node_modules/.bin/jest --coverage -c jest.config.js",
@@ -16,7 +18,6 @@
   "engines": {
     "node": "^10.16.0"
   },
-  "author": "Leonard Henriquez",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -48,5 +49,27 @@
     "jest": "^24.8.0",
     "nodemon": "^1.18.10",
     "supertest": "^4.0.2"
-  }
+  },
+  "browserslist": [
+    "node 10.16.0"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:leonard-henriquez/node-api-boilerplate.git"
+  },
+  "keywords": [
+    "express",
+    "node",
+    "node.js",
+    "mongodb",
+    "mongoose",
+    "jest",
+    "es6",
+    "REST",
+    "API",
+    "JsonWebToken",
+    "jwt",
+    "authentication",
+    "boilerplate"
+  ]
 }
