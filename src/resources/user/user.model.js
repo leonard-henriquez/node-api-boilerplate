@@ -1,5 +1,7 @@
-import bcrypt from 'bcrypt'
-import mongoose, { Schema } from 'mongoose'
+const mongoose = require('mongoose')
+const { hashPassword, verifyHash } = require('../../helpers/encryption')
+
+const { Schema } = mongoose
 
 const UserSchema = new Schema({
   firstName: {
@@ -36,18 +38,14 @@ UserSchema.pre('save', function (next) {
   if (!user.isModified('hashed_password')) return next()
 
   // Hash the password
-  bcrypt.hash(user.hashed_password, 10)
-    .then((hash) => {
-      // Save hashed password
-      user.hashed_password = hash
-      next()
-    })
-    .catch(err => next(err))
+  const password = user.hashed_password
+  user.hashed_password = null
+  user.hashed_password = hashPassword(password)
+  next()
 })
 
-UserSchema.methods.comparePassword = function (password) {
-  return bcrypt.compare(password, this.hashed_password)
-}
+UserSchema.methods.comparePassword = password => verifyHash(password, this.hashed_password)
 
 const User = mongoose.model('User', UserSchema)
-export default User
+
+module.exports = User

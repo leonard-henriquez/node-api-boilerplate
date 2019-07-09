@@ -1,11 +1,11 @@
-import compression from 'compression'
-import morgan from 'morgan'
-import bodyParser from 'body-parser'
-import methodOverride from 'method-override'
-import cors from 'cors'
-import config from '.'
-import authentication from '../helpers/authentication'
-import loggerFactory from '../helpers/logger'
+const compression = require('compression')
+const morgan = require('morgan')
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
+const cors = require('cors')
+const config = require('.')
+const authentication = require('../helpers/authentication')
+const loggerFactory = require('../helpers/logger')
 
 const logger = loggerFactory('request', config.get('log'))
 
@@ -42,4 +42,4 @@ const middlewares = (app) => {
   return app
 }
 
-export default middlewares
+module.exports = middlewares
