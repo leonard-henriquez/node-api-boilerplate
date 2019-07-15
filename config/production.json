@@ -1,0 +1,16 @@
+{
+  "host": "0.0.0.0",
+  "port": 3000,
+  "debug": false,
+  "env": "production",
+  "log": {
+    "options": {
+      "enable": true,
+      "timestamp": true,
+      "prettyPrint": false,
+      "level": "debug"
+    },
+    "stream": "extreme",
+    "file": "./logs/app.log"
+  }
+}
