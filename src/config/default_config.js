@@ -47,13 +47,27 @@ module.exports = {
     default: appRoot,
   },
   log: {
-    filename: {
-      default: 'logs/app.log',
+    options: {
+      doc: 'Options for log',
+      format: Object,
+      default: {
+        enable: true,
+        timestamp: true,
+        prettyPrint: true,
+        level: 'debug',
+      },
     },
-    level: {
-      default: 'debug',
-      format: ['error', 'warn', 'info', 'verbose', 'debug', 'silly'],
-      env: 'LOG_LEVEL',
+    stream: {
+      doc: 'Output destination for log',
+      format: ['console', 'file', 'extreme'],
+      default: 'console',
+      env: 'LOG_STREAM',
+    },
+    file: {
+      doc: 'File destination for log',
+      format: String,
+      default: undefined,
+      env: 'LOG_FILE',
     },
   },
   jwt_secret: {

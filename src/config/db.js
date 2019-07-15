@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
-const loggerFactory = require('../helpers/logger')
 const config = require('.')
-
-const logger = loggerFactory('db', config.get('log'))
+const logger = require('../helpers/logger').child({ name: 'db' })
 
 module.exports = () => {
   // Set debug

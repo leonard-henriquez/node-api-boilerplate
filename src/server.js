@@ -1,7 +1,7 @@
 const app = require('./app')
 const config = require('./config')
 const connect = require('./config/db')
-const loggerFactory = require('./helpers/logger')
+const logger = require('./helpers/logger').child({ name: 'server' })
 
 // Connect to database
 connect()
@@ -9,7 +9,6 @@ connect()
 // Create server
 const start = () => {
   const { host, env, port } = config.get()
-  const logger = loggerFactory('server', config.get('log'))
 
   try {
     app.listen(port, host)

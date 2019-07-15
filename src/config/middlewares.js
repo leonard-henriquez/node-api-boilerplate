@@ -1,21 +1,10 @@
 const compression = require('compression')
-const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const cors = require('cors')
-const config = require('.')
+const pino = require('express-pino-logger')
+const logger = require('../helpers/logger')
 const authentication = require('../helpers/authentication')
-const loggerFactory = require('../helpers/logger')
-
-const logger = loggerFactory('request', config.get('log'))
-
-const format = (tokens, req, res) => JSON.stringify({
-  method: tokens.method(req, res),
-  url: tokens.url(req, res),
-  status: parseInt(tokens.status(req, res), 10),
-  remoteAddress: tokens['remote-addr'](req, res),
-  responseTime: parseFloat(tokens['response-time'](req, res)),
-})
 
 const middlewares = (app) => {
   // Disable superfluous header
@@ -25,7 +14,7 @@ const middlewares = (app) => {
   app.use(compression())
 
   // Add logger
-  app.use(morgan(format, { stream: logger.streamJson }))
+  app.use(pino({ logger }))
 
   // Add authentication
   app.use(authentication())
