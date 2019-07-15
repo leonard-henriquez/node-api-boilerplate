@@ -3,8 +3,8 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const cors = require('cors')
 const pino = require('express-pino-logger')
-const logger = require('../helpers/logger')
-const authentication = require('../helpers/authentication')
+const logger = require('./logger')
+const auth = require('../helpers/auth')
 
 const middlewares = (app) => {
   // Disable superfluous header
@@ -17,7 +17,7 @@ const middlewares = (app) => {
   app.use(pino({ logger }))
 
   // Add authentication
-  app.use(authentication())
+  app.use(auth())
 
   // Add json parser
   app.use(bodyParser.json())

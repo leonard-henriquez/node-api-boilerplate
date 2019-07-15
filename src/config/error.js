@@ -1,5 +1,5 @@
 const config = require('.')
-const logger = require('../helpers/logger').child({ name: 'error' })
+const logger = require('./logger').child({ name: 'error' })
 
 // Build response for the client
 const response = (err) => {

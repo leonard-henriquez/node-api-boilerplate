@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { hashPassword, verifyHash } = require('../../helpers/encryption')
+const { hashPassword, verifyHash } = require('../../helpers/encrypt')
 
 const { Schema } = mongoose
 

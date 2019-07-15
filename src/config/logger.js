@@ -1,5 +1,5 @@
 const pino = require('pino')
-const config = require('../config')
+const config = require('.')
 
 const { options, stream, file } = config.get('log')
 

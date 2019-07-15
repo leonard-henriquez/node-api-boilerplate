@@ -1,7 +1,7 @@
 const express = require('express')
 const middlewares = require('./config/middlewares')
 const routes = require('./config/routes')
-const errorHandler = require('./config/error_handler')
+const errorHandler = require('./config/error')
 
 // Instantiate express framework and apply middlewares
 const app = express()
