@@ -1,4 +1,4 @@
-const logger = require('./logger').child({ name: 'error' })
+const logger = require('../helpers/logger').child({ name: 'error' })
 
 // Error handler
 const errorHandler = (err, req, res, _next) => {

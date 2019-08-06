@@ -1,7 +1,7 @@
 const app = require('./app')
 const config = require('./config')
 const connect = require('./config/db')
-const logger = require('./config/logger').child({ name: 'server' })
+const logger = require('./helpers/logger').child({ name: 'server' })
 
 // Connect to database
 connect()
