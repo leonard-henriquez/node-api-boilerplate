@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../user/user.model')
 const config = require('../../config')
+const { AuthenticationError } = require('../../helpers/error_types')
 
 const secret = config.get('jwt_secret')
 
@@ -19,25 +20,29 @@ const get = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     // Find user
-    const user = await User.findOne({ email: req.body.email })
+    const user = await User.findOne({ email: req.body.email }).then((result) => {
+      if (!result) throw new AuthenticationError()
+      return result
+    })
 
     // Check if password are matching
-    const passwordMatch = await user.comparePassword(req.body.password)
+    await user.verifyHash(req.body.password).then((result) => {
+      if (!result) throw new AuthenticationError()
+    })
 
-    if (passwordMatch) {
-      const payload = {
-        id: user.id,
-        email: user.email,
-      }
-
-      const token = await jwt.sign(payload, secret, { expiresIn: 36000 })
-      res.json({
-        success: true,
-        token: `Bearer ${token}`,
-      })
+    const payload = {
+      id: user.id,
+      email: user.email,
     }
 
-    next(new Error('Failed to authenticate'))
+    const token = await jwt.sign(payload, secret, { expiresIn: 36000 })
+
+    res.json({
+      success: true,
+      token: `Bearer ${token}`,
+    })
+
+    next()
   } catch (error) {
     next(error)
   }

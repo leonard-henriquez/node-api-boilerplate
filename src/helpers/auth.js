@@ -12,6 +12,7 @@ const verify = async (payload, next) => {
       email: user.email,
     })
   }
+
   return next(null, false)
 }
 
@@ -20,9 +21,8 @@ module.exports = () => {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: config.get('jwt_secret'),
   }
+  const strategy = new Strategy(options, verify)
+  passport.use(strategy)
 
-  passport.use(
-    new Strategy(options, verify),
-  )
   return passport.initialize()
 }

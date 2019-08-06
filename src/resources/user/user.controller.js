@@ -14,11 +14,8 @@ const list = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    // Create local user
-    const user = new User(req.body)
-
-    // Save local user to db
-    await user.save()
+    // Create user
+    const user = await User.create(req.body)
 
     // Return result
     res.status(200).json({ user })

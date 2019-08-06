@@ -10,7 +10,7 @@ const {
 const router = Router()
 
 router.route('/')
-  .get(passport.authenticate('jwt', { session: false }), get)
+  .get(passport.authenticate('jwt', { session: false, failWithError: true }), get)
   .post(login)
   .delete(logout)
 

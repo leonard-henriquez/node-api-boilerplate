@@ -19,7 +19,7 @@ const UserSchema = new Schema({
     dropDups: true,
     index: true,
   },
-  hashed_password: {
+  hashedPassword: {
     type: String,
     required: true,
   },
@@ -27,24 +27,26 @@ const UserSchema = new Schema({
 
 UserSchema
   .virtual('password')
-  .set(function setPassword(password) {
-    this.hashed_password = password
+  .set(function (password) {
+    this.hashedPassword = password
   })
 
 UserSchema.pre('save', function (next) {
   const user = this
 
   // Skip if password has not changed
-  if (!user.isModified('hashed_password')) return next()
+  if (!user.isModified('hashedPassword')) return next()
 
   // Hash the password
-  const password = user.hashed_password
-  user.hashed_password = null
-  user.hashed_password = hashPassword(password)
+  const password = user.hashedPassword
+  user.hashedPassword = null
+  user.hashedPassword = hashPassword(password)
   next()
 })
 
-UserSchema.methods.comparePassword = password => verifyHash(password, this.hashed_password)
+UserSchema.methods.verifyHash = async function (password) {
+  return verifyHash(password, this.hashedPassword)
+}
 
 const User = mongoose.model('User', UserSchema)
 
