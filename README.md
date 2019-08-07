@@ -1,4 +1,4 @@
-# Node API Boilerplate ![language](https://img.shields.io/badge/language-javascript-blue.svg)
+# Node API Boilerplate ![language](https://img.shields.io/badge/language-javascript-green.svg) ![license](https://img.shields.io/github/license/leonard-henriquez/node-api-boilerplate) [![Coverage Status](https://coveralls.io/repos/github/leonard-henriquez/node-api-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/leonard-henriquez/node-api-boilerplate?branch=master)
 
 > Node API Boilerplate
 
