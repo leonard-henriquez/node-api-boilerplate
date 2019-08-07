@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../user/user.model')
 const config = require('../../config')
-const { AuthenticationError } = require('../../helpers/error_types')
+const { Forbidden } = require('../../helpers/error_types')
 
 const secret = config.get('jwt_secret')
 
@@ -21,13 +21,13 @@ const login = async (req, res, next) => {
   try {
     // Find user
     const user = await User.findOne({ email: req.body.email }).then((result) => {
-      if (!result) throw new AuthenticationError()
+      if (!result) throw new Forbidden()
       return result
     })
 
     // Check if password are matching
     await user.verifyHash(req.body.password).then((result) => {
-      if (!result) throw new AuthenticationError()
+      if (!result) throw new Forbidden()
     })
 
     const payload = {
