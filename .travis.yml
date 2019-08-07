@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "stable"
+  - "10.16"
+services:
+  - mongodb
+cache:
+  directories:
+  - node_modules
+env:
+  - MONGO_URI=mongodb://localhost/dev
+script:
+  - yarn test:coveralls --forceExit
