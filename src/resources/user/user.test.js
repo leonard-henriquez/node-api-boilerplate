@@ -1,5 +1,6 @@
 const request = require('supertest')
 const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose')
 const app = require('../../app')
 const config = require('../../config')
 const connect = require('../../config/db')
@@ -31,6 +32,10 @@ describe('Users', () => {
 
   beforeAll(async () => {
     connect()
+  })
+
+  afterAll(async () => {
+    await mongoose.disconnect()
   })
 
   test('GET /api/users/ should return 401 when not logged in', async () => {
