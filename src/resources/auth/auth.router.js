@@ -4,14 +4,14 @@ const { Router } = require('express')
 const {
   get,
   login,
-  logout,
 } = require('./auth.controller')
 
 const router = Router()
 
+const auth = passport.authenticate('jwt', { session: false, failWithError: true })
+
 router.route('/')
-  .get(passport.authenticate('jwt', { session: false, failWithError: true }), get)
+  .get(auth, get)
   .post(login)
-  .delete(logout)
 
 module.exports = router

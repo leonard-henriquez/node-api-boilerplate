@@ -8,10 +8,10 @@ const secret = config.get('jwt_secret')
 const get = async (req, res, next) => {
   try {
     // Find all users
-    const users = await User.find({})
+    const user = await User.findOne({ email: req.user.email })
 
     // Return results
-    res.status(200).json({ users })
+    res.status(200).json(user)
   } catch (error) {
     next(error)
   }
@@ -37,24 +37,11 @@ const login = async (req, res, next) => {
 
     const token = await jwt.sign(payload, secret, { expiresIn: 36000 })
 
-    res.json({
-      success: true,
+    res.status(200).json({
+      status: true,
       token: `Bearer ${token}`,
     })
-
     next()
-  } catch (error) {
-    next(error)
-  }
-}
-
-const logout = async (req, res, next) => {
-  try {
-    // Find all users
-    const users = await User.find({})
-
-    // Return results
-    res.status(200).json({ users })
   } catch (error) {
     next(error)
   }
@@ -63,5 +50,4 @@ const logout = async (req, res, next) => {
 module.exports = {
   get,
   login,
-  logout,
 }
