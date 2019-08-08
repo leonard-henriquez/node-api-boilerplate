@@ -1,10 +1,10 @@
 const app = require('./app')
 const config = require('./config')
-const connect = require('./config/db')
+const db = require('./config/db')
 const logger = require('./helpers/logger').child({ name: 'server' })
 
 // Connect to database
-connect()
+db.connect()
 
 // Create server
 const start = () => {
