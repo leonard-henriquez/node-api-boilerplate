@@ -1,4 +1,10 @@
 const logger = require('../helpers/logger').child({ name: 'error' })
+const { NotFound } = require('../helpers/error_types')
+
+// Not found handler
+const notFoundHandler = (req, res, _next) => {
+  if (!res.headersSent) throw new NotFound()
+}
 
 // Error handler
 const errorHandler = (err, req, res, _next) => {
@@ -14,6 +20,9 @@ const errorHandler = (err, req, res, _next) => {
 }
 
 module.exports = (app) => {
+  // Register notFoundHanlder as a middleware
+  app.use(notFoundHandler)
+
   // Register errorHandler as a middleware
   app.use(errorHandler)
 
