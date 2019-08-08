@@ -53,7 +53,7 @@ describe('Authentication', () => {
       .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200)
-    expect(response.body._id).toEqual(user.id)
+    expect(response.body).toHaveProperty('_id', user.id)
   })
 
   test('POST /api/auth/ should return 403 when trying to log in with wrong credentials', async () => {
