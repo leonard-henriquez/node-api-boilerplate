@@ -38,12 +38,10 @@ const connect = async () => {
 
   // Connect to MongoDb
   const mongo = config.get('mongo')
-  await mongoose.connect(mongo.URI, mongo.options)
+  return mongoose.connect(mongo.URI, mongo.options)
 }
 
-const disconnect = async () => {
-  await mongoose.disconnect()
-}
+const disconnect = async () => mongoose.disconnect()
 
 module.exports = {
   connect,

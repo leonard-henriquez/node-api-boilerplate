@@ -14,6 +14,7 @@
     "ecmaVersion": 2018
   },
   "rules": {
+    "no-use-before-define": 0,
     "consistent-return": 0,
     "func-names": 0,
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
