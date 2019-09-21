@@ -1,5 +1,5 @@
-const pino = require('pino')
-const config = require('../config')
+import pino from 'pino'
+import config from '../config'
 
 const { options, stream, file } = config.get('log')
 
@@ -12,4 +12,4 @@ if (stream === 'extreme' && file) {
   destination = pino.destination()
 }
 
-module.exports = pino(options, destination)
+export default pino(options, destination)

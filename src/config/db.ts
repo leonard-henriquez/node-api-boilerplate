@@ -1,6 +1,8 @@
-const mongoose = require('mongoose')
-const config = require('.')
-const logger = require('../helpers/logger').child({ name: 'db' })
+import mongoose from 'mongoose'
+import config from '.'
+import loggerFactory from '../helpers/logger'
+
+const logger = loggerFactory.child({ name: 'db' })
 
 mongoose.connection.on('connected', () => {
   logger.info('Connection Established')
@@ -18,14 +20,14 @@ mongoose.connection.on('close', () => {
   logger.info('Connection Closed')
 })
 
-mongoose.connection.on('error', (error) => {
+mongoose.connection.on('error', error => {
   logger.error(error)
 })
 
 const connect = async () => {
   // Set debug
   if (config.get('debug')) {
-    mongoose.set('debug', (collection, method, query, doc, options) => {
+    mongoose.set('debug', (collection: any, method: any, query: any, doc: any, options: any) => {
       logger.info({
         collection,
         method,
@@ -43,7 +45,4 @@ const connect = async () => {
 
 const disconnect = async () => mongoose.disconnect()
 
-module.exports = {
-  connect,
-  disconnect,
-}
+export default { connect, disconnect }

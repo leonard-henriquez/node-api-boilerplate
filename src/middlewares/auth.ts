@@ -1,8 +1,8 @@
-const passport = require('passport')
-const { Strategy, ExtractJwt } = require('passport-jwt')
-const config = require('../config')
+import passport from 'passport'
+import { Strategy, ExtractJwt } from 'passport-jwt'
+import config from '../config'
 
-const verify = async (payload, next) => {
+const verify = async (payload: any, next: any) => {
   try {
     return next(null, payload)
   } catch (error) {
@@ -10,10 +10,10 @@ const verify = async (payload, next) => {
   }
 }
 
-module.exports = () => {
+export default () => {
   const options = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: config.get('jwt_secret'),
+    secretOrKey: config.get('jwtSecret'),
   }
   const strategy = new Strategy(options, verify)
   passport.use(strategy)

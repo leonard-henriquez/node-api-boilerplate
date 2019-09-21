@@ -1,12 +1,13 @@
-const compression = require('compression')
-const bodyParser = require('body-parser')
-const methodOverride = require('method-override')
-const cors = require('cors')
-const pino = require('express-pino-logger')
-const logger = require('../helpers/logger')
-const auth = require('../middlewares/auth')
+import { Express } from 'express'
+import compression from 'compression'
+import bodyParser from 'body-parser'
+import methodOverride from 'method-override'
+import cors from 'cors'
+import pino from 'express-pino-logger'
+import logger from '../helpers/logger'
+import auth from '../middlewares/auth'
 
-const middlewares = (app) => {
+const middlewares = (app: Express): Express => {
   // Disable superfluous header
   app.disable('x-powered-by')
 
@@ -31,4 +32,4 @@ const middlewares = (app) => {
   return app
 }
 
-module.exports = middlewares
+export default middlewares

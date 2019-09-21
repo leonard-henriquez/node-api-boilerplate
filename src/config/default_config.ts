@@ -1,8 +1,8 @@
-const path = require('path')
+import path from 'path'
 
 const appRoot = path.resolve(path.join(__dirname, '..', '..'))
 
-module.exports = {
+export default {
   host: {
     doc: 'Hostname for server',
     default: '0.0.0.0',
@@ -31,7 +31,7 @@ module.exports = {
     URI: {
       doc: 'URI for connecting Mongo DB',
       format: String,
-      default: null,
+      default: '',
       env: 'MONGO_URI',
     },
     options: {
@@ -43,7 +43,7 @@ module.exports = {
       },
     },
   },
-  app_root: {
+  appRoot: {
     default: appRoot,
   },
   log: {
@@ -52,7 +52,6 @@ module.exports = {
       format: Object,
       default: {
         enable: true,
-        timestamp: true,
         prettyPrint: true,
         level: 'debug',
       },
@@ -70,7 +69,7 @@ module.exports = {
       env: 'LOG_FILE',
     },
   },
-  jwt_secret: {
+  jwtSecret: {
     doc: 'JWT secret',
     format: String,
     default: 'secret',

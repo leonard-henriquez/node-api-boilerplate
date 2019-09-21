@@ -1,11 +1,11 @@
-const request = require('supertest')
-const jwt = require('jsonwebtoken')
-const app = require('../../app')
-const config = require('../../config')
-const db = require('../../config/db')
-const User = require('../user/user.model')
+import request from 'supertest'
+import jwt from 'jsonwebtoken'
+import app from '../../app'
+import config from '../../config'
+import db from '../../config/db'
+import User from '../user/user.model'
 
-const secret = config.get('jwt_secret')
+const secret = config.get('jwtSecret')
 
 describe('Users', () => {
   const userAttributes = {
@@ -25,7 +25,7 @@ describe('Users', () => {
     return { user, token }
   }
 
-  const deleteUser = async (user) => {
+  const deleteUser = async user => {
     await User.deleteOne({ email: user.email })
   }
 

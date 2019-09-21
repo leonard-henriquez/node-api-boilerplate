@@ -1,11 +1,12 @@
-const jwt = require('jsonwebtoken')
-const User = require('../user/user.model')
-const config = require('../../config')
-const { Forbidden } = require('../../helpers/error_types')
+import { Request, Response, NextFunction } from 'express'
+import jwt from 'jsonwebtoken'
+import User from '../user/user.model'
+import config from '../../config'
+import { Forbidden } from '../../helpers/error_types'
 
-const secret = config.get('jwt_secret')
+const secret = config.get('jwtSecret')
 
-const get = async (req, res, next) => {
+const get = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // Find all users
     const user = await User.findOne({ email: req.user.email })
@@ -17,16 +18,16 @@ const get = async (req, res, next) => {
   }
 }
 
-const login = async (req, res, next) => {
+const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // Find user
-    const user = await User.findOne({ email: req.body.email }).then((result) => {
+    const user = await User.findOne({ email: req.body.email }).then(result => {
       if (!result) throw new Forbidden()
       return result
     })
 
     // Check if password are matching
-    await user.verifyHash(req.body.password).then((result) => {
+    await user.verifyHash(req.body.password).then((result: any) => {
       if (!result) throw new Forbidden()
     })
 
@@ -47,7 +48,4 @@ const login = async (req, res, next) => {
   }
 }
 
-module.exports = {
-  get,
-  login,
-}
+export { get, login }

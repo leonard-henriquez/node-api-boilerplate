@@ -1,14 +1,15 @@
-const request = require('supertest')
-const jwt = require('jsonwebtoken')
-const app = require('../../app')
-const config = require('../../config')
-const db = require('../../config/db')
-const User = require('../user/user.model')
+import request from 'supertest'
+import { sign, verify } from 'jsonwebtoken'
+import app from '../../app'
+import config from '../../config'
+import db from '../../config/db'
+import User from '../user/user.model'
 
-const secret = config.get('jwt_secret')
+const { connect, disconnect } = db
+const secret = config.get('jwtSecret')
 
 describe('Authentication', () => {
-  let user
+  let user: any
   const invalidCredentials = {
     email: 'root@localhost',
     password: 'secret',
@@ -20,7 +21,7 @@ describe('Authentication', () => {
   }
 
   beforeAll(async () => {
-    await db.connect()
+    await connect()
 
     await User.deleteOne({ email: validCredentials.email })
 
@@ -33,7 +34,7 @@ describe('Authentication', () => {
   })
 
   afterAll(async () => {
-    await db.disconnect()
+    await disconnect()
   })
 
   test('GET /api/auth/ should return 401 when not logged in', async () => {
@@ -46,7 +47,7 @@ describe('Authentication', () => {
 
   test('GET /api/auth/ should return 200 when logged in', async () => {
     const payload = { id: user.id, email: user.email }
-    const token = await jwt.sign(payload, secret, { expiresIn: 36000 })
+    const token = await sign(payload, secret, { expiresIn: 36000 })
     const response = await request(app)
       .get('/api/auth')
       .set('Authorization', `Bearer ${token}`)
@@ -72,12 +73,10 @@ describe('Authentication', () => {
       .expect('Content-Type', /json/)
       .send(validCredentials)
       .expect(200)
-    expect(response.body)
-      .toHaveProperty('status', true)
-    expect(response.body)
-      .toHaveProperty('token')
+    expect(response.body).toHaveProperty('status', true)
+    expect(response.body).toHaveProperty('token')
 
     const token = response.body.token.split('Bearer ')[1]
-    await jwt.verify(token, secret)
+    await verify(token, secret)
   })
 })

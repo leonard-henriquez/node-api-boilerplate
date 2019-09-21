@@ -1,6 +1,7 @@
-const User = require('./user.model')
+import { Request, Response, NextFunction } from 'express'
+import User from './user.model'
 
-const list = async (req, res, next) => {
+const list = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // Find all users
     const users = await User.find({})
@@ -12,7 +13,7 @@ const list = async (req, res, next) => {
   }
 }
 
-const create = async (req, res, next) => {
+const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // Create user
     await User.create(req.body)
@@ -25,7 +26,7 @@ const create = async (req, res, next) => {
   }
 }
 
-const get = async (req, res, next) => {
+const get = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // Find user
     const user = await User.findOne({ _id: req.params.id })
@@ -37,7 +38,7 @@ const get = async (req, res, next) => {
   }
 }
 
-const update = async (req, res, next) => {
+const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // Find and update user
     await User.updateOne({ _id: req.params.id }, req.body)
@@ -50,7 +51,7 @@ const update = async (req, res, next) => {
   }
 }
 
-const remove = async (req, res, next) => {
+const remove = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // Find and remove user
     await User.deleteOne({ _id: req.params.id })
@@ -62,10 +63,4 @@ const remove = async (req, res, next) => {
   }
 }
 
-module.exports = {
-  list,
-  create,
-  get,
-  update,
-  remove,
-}
+export { list, create, get, update, remove }
