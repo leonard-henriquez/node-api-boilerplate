@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import User from './user.model'
 
-const list = async (req: Request, res: Response, next: NextFunction) => {
+const list = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     // Find all users
     const users = await User.find({})
@@ -13,7 +13,7 @@ const list = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const create = async (req: Request, res: Response, next: NextFunction) => {
+const create = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     // Create user
     await User.create(req.body)
@@ -26,7 +26,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const get = async (req: Request, res: Response, next: NextFunction) => {
+const get = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     // Find user
     const user = await User.findOne({ _id: req.params.id })
@@ -38,7 +38,7 @@ const get = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const update = async (req: Request, res: Response, next: NextFunction) => {
+const update = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     // Find and update user
     await User.updateOne({ _id: req.params.id }, req.body)
@@ -51,7 +51,7 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const remove = async (req: Request, res: Response, next: NextFunction) => {
+const remove = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     // Find and remove user
     await User.deleteOne({ _id: req.params.id })

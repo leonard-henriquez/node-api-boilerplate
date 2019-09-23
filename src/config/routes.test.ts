@@ -1,10 +1,6 @@
 import request from 'supertest'
 import app from '../app'
 
-const here = () => {
-  console.log('here')
-}
-
 describe('Test framework routes', () => {
   test('Get answer from /', async () => {
     await request(app)

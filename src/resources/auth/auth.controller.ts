@@ -6,7 +6,7 @@ import { Forbidden } from '../../helpers/error_types'
 
 const secret = config.get('jwtSecret')
 
-const get = async (req: Request, res: Response, next: NextFunction) => {
+const get = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     // Find all users
     const user = await User.findOne({ email: req.user.email })
@@ -18,7 +18,7 @@ const get = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const login = async (req: Request, res: Response, next: NextFunction) => {
+const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     // Find user
     const user = await User.findOne({ email: req.body.email }).then(result => {
@@ -27,7 +27,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     })
 
     // Check if password are matching
-    await user.verifyHash(req.body.password).then((result: any) => {
+    await user.verifyHash(req.body.password).then(result => {
       if (!result) throw new Forbidden()
     })
 

@@ -25,7 +25,7 @@ describe('Users', () => {
     return { user, token }
   }
 
-  const deleteUser = async user => {
+  const deleteUser = async (user: any) => {
     await User.deleteOne({ email: user.email })
   }
 

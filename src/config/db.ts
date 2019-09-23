@@ -24,7 +24,7 @@ mongoose.connection.on('error', error => {
   logger.error(error)
 })
 
-const connect = async () => {
+const connect = async (): Promise<typeof mongoose> => {
   // Set debug
   if (config.get('debug')) {
     mongoose.set('debug', (collection: any, method: any, query: any, doc: any, options: any) => {
@@ -43,6 +43,6 @@ const connect = async () => {
   return mongoose.connect(mongo.URI, mongo.options)
 }
 
-const disconnect = async () => mongoose.disconnect()
+const disconnect = async (): Promise<void> => mongoose.disconnect()
 
 export default { connect, disconnect }

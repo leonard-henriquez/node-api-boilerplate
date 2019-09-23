@@ -1,12 +1,6 @@
-import { model, Schema, Document } from 'mongoose'
+import { model, Schema } from 'mongoose'
 import { hashPassword, verifyHash } from '../../helpers/encrypt'
-
-export interface UserDocument extends Document {
-  firstName: string
-  lastName: string
-  email: string
-  hashedPassword: string
-}
+import { UserModelInterface } from 'user'
 
 const UserSchema = new Schema({
   firstName: {
@@ -34,7 +28,7 @@ UserSchema.virtual('password').set(function(this: { hashedPassword: string }, pa
   this.hashedPassword = password
 })
 
-UserSchema.pre('save', function(this: UserDocument, next) {
+UserSchema.pre('save', function(this: UserModelInterface, next) {
   // Skip if password has not changed
   if (!this.isModified('hashedPassword')) return next()
 
@@ -48,4 +42,4 @@ UserSchema.methods.verifyHash = async function(password: string): Promise<boolea
   return verifyHash(password, this.hashedPassword)
 }
 
-export default model('User', UserSchema)
+export default model<UserModelInterface>('User', UserSchema)
