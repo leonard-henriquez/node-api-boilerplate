@@ -1,6 +1,4 @@
-interface BaseError extends Error {
-  status: number
-}
+import { BaseError } from 'error'
 
 class Forbidden extends Error implements BaseError {
   status: number

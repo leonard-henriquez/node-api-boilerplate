@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import userRouter from '../resources/user/user.router'
-import authRouter from '../resources/auth/auth.router'
+import userRouter from '@interface/http/controllers/user/user.router'
+import authRouter from '@interface/http/controllers/auth/auth.router'
 
 // Register routes
 export default (app: Router): Router => {

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import config from '.'
-import loggerFactory from '../helpers/logger'
+import loggerFactory from '@infrastructure/logger'
 
 const logger = loggerFactory.child({ name: 'db' })
 

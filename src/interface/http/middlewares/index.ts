@@ -4,8 +4,8 @@ import bodyParser from 'body-parser'
 import methodOverride from 'method-override'
 import cors from 'cors'
 import pino from 'express-pino-logger'
-import logger from '../helpers/logger'
-import auth from '../middlewares/auth'
+import logger from '@infrastructure/logger'
+import auth from '@interface/http/middlewares/auth'
 
 const middlewares = (app: Express): Express => {
   // Disable superfluous header

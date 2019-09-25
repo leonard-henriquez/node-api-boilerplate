@@ -64,10 +64,16 @@ module.exports = {
   // ],
 
   // An array of file extensions your modules use
-  moduleFileExtensions: ['js', 'ts', 'json'],
+  moduleFileExtensions: ['js', 'ts'],
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    '^@domain/(.*)$': '<rootDir>/src/domain/$1',
+    '^@app/(.*)$': '<rootDir>/src/app/$1',
+    '^@infrastructure/(.*)$': '<rootDir>/src/infrastructure/$1',
+    '^@interface/(.*)$': '<rootDir>/src/interface/$1',
+    '^@config/(.*)$': '<rootDir>/src/config/$1',
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],

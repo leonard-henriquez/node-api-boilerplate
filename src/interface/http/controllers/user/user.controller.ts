@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import User from './user.model'
+import User from '@domain/user'
 
 const list = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {

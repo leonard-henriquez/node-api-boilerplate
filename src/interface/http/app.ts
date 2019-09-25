@@ -1,7 +1,7 @@
 import express from 'express'
-import middlewares from './config/middlewares'
-import routes from './config/routes'
-import errorHandler from './middlewares/error'
+import routes from '@config/routes'
+import middlewares from '@interface/http/middlewares'
+import errorHandler from '@interface/http/error/handler'
 
 // Instantiate express framework and apply middlewares
 const app = express()

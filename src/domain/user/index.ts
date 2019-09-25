@@ -1,6 +1,6 @@
-import { model, Schema } from 'mongoose'
-import { hashPassword, verifyHash } from '../../helpers/encrypt'
 import { UserModelInterface } from 'user'
+import { model, Schema } from 'mongoose'
+import { hashPassword, verifyHash } from '@infrastructure/crypto'
 
 const UserSchema = new Schema({
   firstName: {

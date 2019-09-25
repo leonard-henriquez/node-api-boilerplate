@@ -1,7 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express'
-import { BaseError, NotFound } from '../helpers/error_types'
-import loggerFactory from '../helpers/logger'
-
+import { BaseError, NotFound } from './types'
+import loggerFactory from '@infrastructure/logger'
 const logger = loggerFactory.child({ name: 'error' })
 
 // Not found handler

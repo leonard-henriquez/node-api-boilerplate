@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
-import User from '../user/user.model'
-import config from '../../config'
-import { Forbidden } from '../../helpers/error_types'
+import User from '@domain/user'
+import config from '@config/index'
+import { Forbidden } from '@interface/http/error/types'
 
 const secret = config.get('jwtSecret')
 

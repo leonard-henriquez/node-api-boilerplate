@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Node API Boilerplate",
   "author": "Leonard Henriquez <leonard.henriquez@edhec.com>",
-  "main": "src/server.js",
+  "main": "src/interface/http/server.js",
   "private": false,
   "scripts": {
     "lint": "eslint --ext '.js,.ts' src",
@@ -13,12 +13,12 @@
     "test:coverage": "jest --coverage --detectOpenHandles",
     "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "routes": "./bin/routes",
-    "start": "nodemon --exec ts-node src/server.ts",
+    "start": "nodemon --exec ts-node -r tsconfig-paths/register src/interface/http/server.ts",
     "type-check": "tsc --noEmit --pretty",
     "type-check:watch": "tsc --noEmit --pretty --watch",
     "build": "tsc --pretty",
     "build:dev": "tsc --pretty --sourceMap true",
-    "serve": "NODE_ENV=production LOG_LEVEL=error node dist/server.js"
+    "serve": "NODE_ENV=production LOG_LEVEL=error node dist/interface/http/server.js"
   },
   "engines": {
     "node": ">=10.16.0"
@@ -67,6 +67,7 @@
     "supertest": "^4.0.2",
     "ts-jest": "^24.1.0",
     "ts-node": "^8.4.1",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.6.3"
   },
   "browserslist": [

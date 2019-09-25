@@ -1,9 +1,9 @@
 import request from 'supertest'
 import jwt from 'jsonwebtoken'
-import app from '../../app'
-import config from '../../config'
-import db from '../../config/db'
-import User from '../user/user.model'
+import app from '@interface/http/app'
+import config from '@config/index'
+import db from '@config/db'
+import User from '@domain/user'
 
 const secret = config.get('jwtSecret')
 

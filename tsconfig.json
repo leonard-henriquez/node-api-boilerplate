@@ -11,9 +11,9 @@
     // Search under node_modules for non-relative imports.
     "moduleResolution": "node",
     // Process .js files.
-    "allowJs": true,
+    "allowJs": false,
     // Infer types from js files
-    "checkJs": true,
+    "checkJs": false,
     // Enable strictest settings
     "strict": true,
     // No impilicate any
@@ -22,16 +22,23 @@
     "strictNullChecks": false,
     // Disallow features that require cross-file information for emit.
     "isolatedModules": false,
+    // Disallow inherited types
+    "strictFunctionTypes": true,
     // Import non-ES modules as default imports.
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    // Path to find relative modules
+    "baseUrl": "src",
+    // Aliases for relative module
+    "paths": {
+      "*": ["types/*", "node_modules/*"],
+      "@domain/*": ["domain/*"],
+      "@app/*": ["app/*"],
+      "@infrastructure/*": ["infrastructure/*"],
+      "@interface/*": ["interface/*"],
+      "@config/*": ["config/*"]
+    }
   },
   "include": [
     "src"
-  ],
-  "paths": {
-    "*": [
-      "src/types/*",
-      "node_modules/*"
-    ]
-  }
+  ]
 }

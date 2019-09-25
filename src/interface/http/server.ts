@@ -1,8 +1,8 @@
 import http from 'http'
-import app from './app'
-import config from './config'
-import db from './config/db'
-import loggerFactory from './helpers/logger'
+import config from '@config/index'
+import db from '@config/db'
+import app from '@interface/http/app'
+import loggerFactory from '@infrastructure/logger'
 
 const logger = loggerFactory.child({ name: 'server' })
 

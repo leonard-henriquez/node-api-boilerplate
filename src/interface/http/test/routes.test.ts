@@ -1,5 +1,5 @@
 import request from 'supertest'
-import app from '../app'
+import app from '@interface/http/app'
 
 describe('Test framework routes', () => {
   test('Get answer from /', async () => {
