@@ -1,10 +1,14 @@
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import User from '@domain/user'
-import config from '@config/index'
 import { Forbidden } from '@interface/http/error/types'
+import { ConfigInterface } from '@ports'
+import { container } from '@interface/http/container'
+import { types } from '@interface/http/types'
 
-const secret = config.get('jwtSecret')
+const config = container.get<ConfigInterface>(types.config)
+
+const secret = config.jwtSecret
 
 const get = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
@@ -27,7 +31,7 @@ const login = async (req: Request, res: Response, next: NextFunction): Promise<v
     })
 
     // Check if password are matching
-    await user.verifyHash(req.body.password).then(result => {
+    await user.verifyPassword(req.body.password).then(result => {
       if (!result) throw new Forbidden()
     })
 

@@ -1,21 +1,16 @@
 import { Express } from 'express'
-import compression from 'compression'
 import bodyParser from 'body-parser'
 import methodOverride from 'method-override'
 import cors from 'cors'
-import pino from 'express-pino-logger'
-import logger from '@infrastructure/logger'
+import httpLogger from '@interface/http/middlewares/http_logger'
 import auth from '@interface/http/middlewares/auth'
 
 const middlewares = (app: Express): Express => {
   // Disable superfluous header
   app.disable('x-powered-by')
 
-  // Add compression
-  app.use(compression())
-
   // Add logger
-  app.use(pino({ logger }))
+  app.use(httpLogger())
 
   // Add authentication
   app.use(auth())

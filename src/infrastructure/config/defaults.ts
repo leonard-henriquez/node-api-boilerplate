@@ -1,6 +1,6 @@
 import path from 'path'
 
-const appRoot = path.resolve(path.join(__dirname, '..', '..'))
+const appRoot = path.resolve(path.join(__dirname, '..', '..', '..'))
 
 export default {
   host: {

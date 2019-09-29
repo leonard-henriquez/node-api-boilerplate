@@ -1,16 +1,16 @@
-import dotenv from 'dotenv'
 import path from 'path'
 import convict from 'convict'
-import defaultConfig from './default_config'
-
-dotenv.config()
+import defaultConfig from './defaults'
+import { ConfigInterface } from '@ports'
+import dotenv from 'dotenv'
 
 // Load config
 const config = convict(defaultConfig)
 
 // Load env config
+dotenv.config()
+const env = process.env.NODE_ENV
 const appRoot = config.get('appRoot')
-const env = config.get('env')
 const envConfigPath = path.join(appRoot, 'config', `${env}.json`)
 try {
   config.loadFile(envConfigPath)
@@ -22,4 +22,4 @@ try {
 // Perform validation
 config.validate({ allowed: 'strict' })
 
-export default config
+export default config.getProperties() as ConfigInterface

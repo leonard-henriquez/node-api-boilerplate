@@ -1,6 +1,9 @@
-import { UserModelInterface } from 'user'
-import { model, Schema } from 'mongoose'
+import { model, Schema, Document } from 'mongoose'
 import { hashPassword, verifyHash } from '@infrastructure/crypto'
+
+interface UserModelInterface extends Express.User, Document {
+  verifyPassword(password: string): Promise<boolean>
+}
 
 const UserSchema = new Schema({
   firstName: {
@@ -38,7 +41,7 @@ UserSchema.pre('save', function(this: UserModelInterface, next) {
   next()
 })
 
-UserSchema.methods.verifyHash = async function(password: string): Promise<boolean> {
+UserSchema.methods.verifyPassword = async function(password: string): Promise<boolean> {
   return verifyHash(password, this.hashedPassword)
 }
 

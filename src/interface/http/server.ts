@@ -1,12 +1,15 @@
+import 'reflect-metadata'
 import http from 'http'
-import config from '@config/index'
-import db from '@config/db'
+import { LoggerInterface, ConfigInterface } from '@ports'
+import { container } from '@interface/http/container'
+import { types } from '@interface/http/types'
+import db from '@infrastructure/database/db'
 import app from '@interface/http/app'
-import loggerFactory from '@infrastructure/logger'
 
-const logger = loggerFactory.child({ name: 'server' })
+const logger = container.get<LoggerInterface>(types.logger)
+const config = container.get<ConfigInterface>(types.config)
 
-const { host, env, port } = config.get()
+const { host, env, port } = config
 
 const start = (): Promise<http.Server> =>
   new Promise(

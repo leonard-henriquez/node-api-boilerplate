@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import passport from 'passport'
-import { list, create, get, update, remove } from './user.controller'
+import { list, create, get, update, remove } from './controller'
 
 const router = Router()
 

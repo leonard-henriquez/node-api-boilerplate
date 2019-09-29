@@ -1,5 +1,5 @@
 import express from 'express'
-import routes from '@config/routes'
+import router from '@interface/http/router'
 import middlewares from '@interface/http/middlewares'
 import errorHandler from '@interface/http/error/handler'
 
@@ -10,7 +10,7 @@ const app = express()
 middlewares(app)
 
 // Import routes
-routes(app)
+router(app)
 
 // Add error handler
 errorHandler(app)

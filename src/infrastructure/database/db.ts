@@ -1,8 +1,10 @@
 import mongoose from 'mongoose'
-import config from '.'
-import loggerFactory from '@infrastructure/logger'
+import { container } from '@interface/http/container'
+import { types } from '@interface/http/types'
+import { LoggerInterface, ConfigInterface } from '@ports'
 
-const logger = loggerFactory.child({ name: 'db' })
+const config = container.get<ConfigInterface>(types.config)
+const logger = container.get<LoggerInterface>(types.logger)
 
 mongoose.connection.on('connected', () => {
   logger.info('Connection Established')
@@ -26,8 +28,8 @@ mongoose.connection.on('error', error => {
 
 const connect = async (): Promise<typeof mongoose> => {
   // Set debug
-  if (config.get('debug')) {
-    mongoose.set('debug', (collection: any, method: any, query: any, doc: any, options: any) => {
+  if (config.debug) {
+    mongoose.set('debug', (collection: string, method: string, query: string, doc: string, options: string) => {
       logger.info({
         collection,
         method,
@@ -39,7 +41,7 @@ const connect = async (): Promise<typeof mongoose> => {
   }
 
   // Connect to MongoDb
-  const mongo = config.get('mongo')
+  const mongo = config.mongo
   return mongoose.connect(mongo.URI, mongo.options)
 }
 

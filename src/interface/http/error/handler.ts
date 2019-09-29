@@ -1,7 +1,10 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import { BaseError, NotFound } from './types'
-import loggerFactory from '@infrastructure/logger'
-const logger = loggerFactory.child({ name: 'error' })
+import { container } from '@interface/http/container'
+import { types } from '@interface/http/types'
+import { LoggerInterface } from '@ports'
+
+const logger = container.get<LoggerInterface>(types.logger)
 
 // Not found handler
 const notFoundHandler = (req: Request, res: Response, next: NextFunction): void => {
@@ -11,7 +14,7 @@ const notFoundHandler = (req: Request, res: Response, next: NextFunction): void 
 // Error handler
 const errorHandler = async (err: BaseError, req: Request, res: Response, next: NextFunction): Promise<void> => {
   // Log error
-  logger.error(err)
+  // logger.error(err)
 
   // Send response
   res.status(err.status || 500).json({

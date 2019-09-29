@@ -1,12 +1,17 @@
+import 'reflect-metadata'
 import request from 'supertest'
 import { sign, verify } from 'jsonwebtoken'
 import app from '@interface/http/app'
-import config from '@config/index'
-import db from '@config/db'
+import db from '@infrastructure/database/db'
 import User from '@domain/user'
+import { ConfigInterface } from '@ports'
+import { container } from '@interface/http/container'
+import { types } from '@interface/http/types'
+
+const config = container.get<ConfigInterface>(types.config)
 
 const { connect, disconnect } = db
-const secret = config.get('jwtSecret')
+const secret = config.jwtSecret
 
 describe('Authentication', () => {
   let user: any

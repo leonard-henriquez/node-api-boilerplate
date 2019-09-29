@@ -30,15 +30,24 @@
     "baseUrl": "src",
     // Aliases for relative module
     "paths": {
-      "*": ["types/*", "node_modules/*"],
       "@domain/*": ["domain/*"],
       "@app/*": ["app/*"],
       "@infrastructure/*": ["infrastructure/*"],
       "@interface/*": ["interface/*"],
-      "@config/*": ["config/*"]
-    }
+      "@ports": ["ports/index.ts"]
+    },
+    "lib": [
+      "es6"
+    ],
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ],
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": [
-    "src"
+    "src", "types"
   ]
 }
